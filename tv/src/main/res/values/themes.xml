@@ -1,0 +1,4 @@
+<resources>
+
+    <style name="Theme.FitHome" parent="Theme.AppCompat.DayNight.NoActionBar" />
+</resources>
