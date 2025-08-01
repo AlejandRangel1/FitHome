@@ -21,6 +21,7 @@ import io.ktor.client.request.*
 import kotlinx.coroutines.launch
 
 
+
 class MainActivity : AppCompatActivity(), SensorEventListener {
 
     private val client = HttpClient(Android)

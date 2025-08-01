@@ -8,7 +8,6 @@
     android:clickable="true"
     android:focusable="true">
 
-    <!-- Cambio realizado por Eduardo-->
 
     <TextView
         android:id="@+id/exercise_name"
@@ -23,5 +22,6 @@
         android:layout_height="wrap_content"
         android:text="Duración: 30s"
         android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+
 
 </LinearLayout>

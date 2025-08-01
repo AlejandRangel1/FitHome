@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
+
 class ExerciseAdapter(
     private val exercises: List<Exercise>,
     private val onItemClicked: (Exercise) -> Unit
