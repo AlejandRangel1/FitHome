@@ -123,7 +123,9 @@ Para ejecutar este proyecto, necesitarás Android Studio y configurar el entorno
 
 ## 📂 Estructura del Proyecto
 
+```
 FitHome/
 ├── mobile/         # Módulo de la aplicación para teléfono
 ├── wear/           # Módulo de la aplicación para Wear OS
 └── tv/             # Módulo de la aplicación para Android TV
+```
