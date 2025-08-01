@@ -7,6 +7,9 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <!-- Cambio realizado por Eduardo en rama pruebas-->
+
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="0dp"
