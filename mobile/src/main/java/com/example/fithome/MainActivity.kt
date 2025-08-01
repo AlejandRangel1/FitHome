@@ -20,6 +20,7 @@ import io.ktor.client.engine.android.*
 import io.ktor.client.request.*
 import kotlinx.coroutines.launch
 
+
 class MainActivity : AppCompatActivity(), SensorEventListener {
 
     private val client = HttpClient(Android)
@@ -50,6 +51,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             Exercise(name = "Plancha", durationInSeconds = 60, videoId = "plank_video", repGoal = 0),
             Exercise(name = "Saltos de Tijera", durationInSeconds = 50, videoId = "jumping_jacks_video", repGoal = 20)
         )
+// Cambio realizado por Eduardo
 
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = ExerciseAdapter(exerciseList) { selectedExercise ->

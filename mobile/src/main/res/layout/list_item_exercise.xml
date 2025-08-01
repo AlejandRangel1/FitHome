@@ -8,6 +8,8 @@
     android:clickable="true"
     android:focusable="true">
 
+    <!-- Cambio realizado por Eduardo-->
+
     <TextView
         android:id="@+id/exercise_name"
         android:layout_width="wrap_content"

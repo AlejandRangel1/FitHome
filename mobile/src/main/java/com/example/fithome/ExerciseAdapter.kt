@@ -33,7 +33,9 @@ class ExerciseAdapter(
         }
     }
 
-    // Clase interna que contiene las vistas de cada fila
+    // Cambio realizado por Eduardo
+
+    // Clase interna que contiene las vistas de cada una de las fila
     class ExerciseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val nameTextView: TextView = itemView.findViewById(R.id.exercise_name)
         private val durationTextView: TextView = itemView.findViewById(R.id.exercise_duration)
