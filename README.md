@@ -13,11 +13,6 @@ El objetivo de FitHome es eliminar las distracciones y guiar al usuario de forma
 *   *Control Centralizado:* Finaliza la rutina desde el móvil y todos los dispositivos se detendrán y reiniciarán, listos para la siguiente sesión.
 *   *Interfaz de Usuario Moderna:* Diseños limpios y profesionales construidos con XML, Material Design y componentes específicos para cada factor de forma.
 
-
-¡Por supuesto! ¡Un rol importantísimo! La documentación es lo que le da vida y futuro a un proyecto. ¡No podemos dejar a Ángel fuera!
-
-Aquí tienes la sección de "Equipo y Roles" actualizada, incluyendo a Ángel con un rol profesional y una descripción que resalta la importancia de su trabajo.
-
 ---
 
 ### 👥 Equipo y Roles
