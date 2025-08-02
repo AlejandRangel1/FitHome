@@ -18,6 +18,7 @@ import com.google.android.gms.wearable.Wearable
 class ChronometerActivity : ComponentActivity(), SensorEventListener {
 
     // --- UI y Temporizador ---
+
     private lateinit var timerText: TextView
     private lateinit var titleText: TextView
     private lateinit var toggleButton: Button
@@ -28,6 +29,7 @@ class ChronometerActivity : ComponentActivity(), SensorEventListener {
     private val handler = android.os.Handler(android.os.Looper.getMainLooper())
 
     // --- Sensores y Lógica de Ejercicio ---
+
     private lateinit var sensorManager: SensorManager
     private var accelerometer: Sensor? = null
     private var repCount = 0
@@ -37,11 +39,14 @@ class ChronometerActivity : ComponentActivity(), SensorEventListener {
     private val SQUAT_THRESHOLD_UP = 9.0f
 
     // El receptor sigue aquí, pero ahora su trabajo es más simple
+
     private val startReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             if (intent?.action == "com.example.fithome.START_TIMER") {
                 Log.d("Routine", "Comando de inicio recibido. Simulando clic en el botón.")
+
                 // Si la rutina no está corriendo, simulamos un clic en el botón de empezar.
+
                 if (!isRunning) {
                     toggleButton.performClick()
                 }
@@ -102,6 +107,7 @@ class ChronometerActivity : ComponentActivity(), SensorEventListener {
         updateTimerText()
 
         // ¡VOLVEMOS A LA LÓGICA DEL BOTÓN QUE SÍ FUNCIONABA!
+
         toggleButton = Button(this).apply {
             text = "Empezar"
             setOnClickListener {
@@ -180,13 +186,16 @@ class ChronometerActivity : ComponentActivity(), SensorEventListener {
             sensorManager.registerListener(this, accel, SensorManager.SENSOR_DELAY_UI)
         }
         // Registramos el receptor para el inicio automático
+
         registerReceiver(startReceiver, IntentFilter("com.example.fithome.START_TIMER"), RECEIVER_NOT_EXPORTED)
     }
 
     override fun onPause() {
         super.onPause()
         sensorManager.unregisterListener(this)
+
         // Desregistramos el receptor
+
         unregisterReceiver(startReceiver)
     }
 
