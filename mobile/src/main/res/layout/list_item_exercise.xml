@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="16dp"
-    android:background="?android:attr/selectableItemBackground"
-    android:clickable="true"
-    android:focusable="true">
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginVertical="8dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp">
 
+<<<<<<< Updated upstream
 
     <TextView
         android:id="@+id/exercise_name"
@@ -15,13 +18,53 @@
         android:layout_height="wrap_content"
         android:text="Nombre del Ejercicio"
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+=======
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+>>>>>>> Stashed changes
 
-    <TextView
-        android:id="@+id/exercise_duration"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Duración: 30s"
-        android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+        <ImageView
+            android:id="@+id/exercise_image"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_margin="16dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_launcher_foreground" /> <!-- Imagen de ejemplo -->
 
+<<<<<<< Updated upstream
 
 </LinearLayout>
+=======
+        <TextView
+            android:id="@+id/exercise_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+            app:layout_constraintBottom_toTopOf="@+id/exercise_duration"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/exercise_image"
+            app:layout_constraintTop_toTopOf="@id/exercise_image"
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:text="Nombre del Ejercicio" />
+
+        <TextView
+            android:id="@+id/exercise_duration"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+            app:layout_constraintBottom_toBottomOf="@id/exercise_image"
+            app:layout_constraintEnd_toEndOf="@id/exercise_name"
+            app:layout_constraintStart_toStartOf="@id/exercise_name"
+            app:layout_constraintTop_toBottomOf="@id/exercise_name"
+            tools:text="Duración: 30s" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>
+>>>>>>> Stashed changes
