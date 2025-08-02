@@ -7,6 +7,9 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+
+    <!-- Cambio realizado por Eduardo en rama pruebas-->
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="0dp"
@@ -20,7 +23,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -50,6 +52,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
+
     <Button
         android:id="@+id/resetButton"
         android:layout_width="wrap_content"
@@ -61,4 +64,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginBottom="32dp" />
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

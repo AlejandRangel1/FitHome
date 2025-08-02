@@ -50,6 +50,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             Exercise(name = "Plancha", durationInSeconds = 60, videoId = "plank_video", repGoal = 0),
             Exercise(name = "Saltos de Tijera", durationInSeconds = 50, videoId = "jumping_jacks_video", repGoal = 20)
         )
+// Cambio realizado por Eduardo
 
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = ExerciseAdapter(exerciseList) { selectedExercise ->
