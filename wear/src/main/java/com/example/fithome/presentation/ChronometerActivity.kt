@@ -169,6 +169,7 @@ class ChronometerActivity : ComponentActivity(), SensorEventListener {
         timerText.text = String.format("%02d:%02d", minutes, seconds)
     }
 
+
     override fun onDestroy() {
         super.onDestroy()
         handler.removeCallbacks(runnable)
