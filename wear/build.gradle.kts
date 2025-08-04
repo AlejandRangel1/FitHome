@@ -46,6 +46,7 @@ android {
 
 dependencies {
     implementation(libs.play.services.wearable)
+    implementation("androidx.wear:wear:1.3.0")
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
@@ -56,6 +57,9 @@ dependencies {
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.core.splashscreen)
     implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.wear)
+    implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.recyclerview)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)

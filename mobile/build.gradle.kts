@@ -54,6 +54,9 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
+    //UI
+    implementation("com.google.android.material:material:1.12.0")
+
     // Ktor Client
     implementation("io.ktor:ktor-client-core:2.3.11")
     implementation("io.ktor:ktor-client-android:2.3.11")

@@ -11,25 +11,23 @@ import android.hardware.SensorManager
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.ComponentActivity
+import com.example.fithome.R // Asegúrate de que este import existe y no está en gris
 import com.google.android.gms.wearable.Wearable
+
 class ChronometerActivity : ComponentActivity(), SensorEventListener {
 
-    // --- UI y Temporizador ---
-
+    // --- Variables de la UI ---
     private lateinit var timerText: TextView
     private lateinit var titleText: TextView
     private lateinit var toggleButton: Button
     private lateinit var repCounterText: TextView
 
+    // --- Variables de Lógica ---
     private var secondsRemaining = 0
     private var isRunning = false
     private val handler = android.os.Handler(android.os.Looper.getMainLooper())
-
-    // --- Sensores y Lógica de Ejercicio ---
-
     private lateinit var sensorManager: SensorManager
     private var accelerometer: Sensor? = null
     private var repCount = 0
@@ -38,22 +36,25 @@ class ChronometerActivity : ComponentActivity(), SensorEventListener {
     private val SQUAT_THRESHOLD_DOWN = 6.0f
     private val SQUAT_THRESHOLD_UP = 9.0f
 
-    // El receptor sigue aquí, pero ahora su trabajo es más simple
-
+    // --- Receptores de Comunicación ---
     private val startReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             if (intent?.action == "com.example.fithome.START_TIMER") {
-                Log.d("Routine", "Comando de inicio recibido. Simulando clic en el botón.")
-
-                // Si la rutina no está corriendo, simulamos un clic en el botón de empezar.
-
-                if (!isRunning) {
-                    toggleButton.performClick()
-                }
+                Log.d("Routine", "Comando de inicio recibido. Simulando clic.")
+                if (!isRunning) { toggleButton.performClick() }
+            }
+        }
+    }
+    private val stopReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            if (intent?.action == "com.example.fithome.STOP_ROUTINE") {
+                Log.d("Routine", "Cerrando por orden del móvil.")
+                finish()
             }
         }
     }
 
+    // --- Lógica del Temporizador ---
     private val runnable = object : Runnable {
         override fun run() {
             if (isRunning && secondsRemaining > 0) {
@@ -66,18 +67,21 @@ class ChronometerActivity : ComponentActivity(), SensorEventListener {
         }
     }
 
-    private val stopReceiver = object : BroadcastReceiver() {
-        override fun onReceive(context: Context?, intent: Intent?) {
-            if (intent?.action == "com.example.fithome.STOP_ROUTINE") {
-                Log.d("Routine", "Cerrando por orden del móvil.")
-                finish() // Simplemente cerramos la actividad
-            }
-        }
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // 1. ¡ESTA LÍNEA ES LA MÁS IMPORTANTE DE TODAS!
+        // Le dice a la actividad que use el diseño del archivo XML.
+        setContentView(R.layout.activity_chronometer)
+
+        // 2. BORRA TODO el código antiguo que creaba TextViews y Buttons aquí.
+        // Ahora, conectamos las variables a las vistas que existen en el XML.
+        timerText = findViewById(R.id.timerText)
+        titleText = findViewById(R.id.titleText)
+        toggleButton = findViewById(R.id.toggleButton)
+        repCounterText = findViewById(R.id.repCounterText)
+
+        // --- El resto de la lógica se queda igual ---
         val routineData = intent.getStringExtra("ROUTINE_DATA")?.split(";")
         val routineName = routineData?.getOrNull(0) ?: "Rutina"
         val totalSeconds = routineData?.getOrNull(1)?.toIntOrNull() ?: 60
@@ -87,73 +91,37 @@ class ChronometerActivity : ComponentActivity(), SensorEventListener {
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
         accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
 
-        titleText = TextView(this).apply {
-            text = routineName
-            textSize = 20f
-            textAlignment = TextView.TEXT_ALIGNMENT_CENTER
-        }
-
-        repCounterText = TextView(this).apply {
-            text = "Reps: $repCount / $repGoal"
-            textSize = 28f
-            textAlignment = TextView.TEXT_ALIGNMENT_CENTER
-            setPadding(0, 20, 0, 20)
-        }
-
-        timerText = TextView(this).apply {
-            textSize = 40f
-            textAlignment = TextView.TEXT_ALIGNMENT_CENTER
-        }
+        // Asignamos los datos iniciales a las vistas
+        titleText.text = routineName
+        repCounterText.text = "Reps: $repCount / $repGoal"
         updateTimerText()
 
-        // ¡VOLVEMOS A LA LÓGICA DEL BOTÓN QUE SÍ FUNCIONABA!
-
-        toggleButton = Button(this).apply {
-            text = "Empezar"
-            setOnClickListener {
-                isRunning = !isRunning
-                if (isRunning) {
-                    text = "Pausar"
-                    handler.post(runnable)
-                    Log.d("Routine", "Rutina INICIADA/REANUDADA.")
-                } else {
-                    text = "Reanudar"
-                    handler.removeCallbacks(runnable)
-                    Log.d("Routine", "Rutina PAUSADA.")
-                }
+        // Asignamos la lógica al botón del XML
+        toggleButton.setOnClickListener {
+            isRunning = !isRunning
+            if (isRunning) {
+                toggleButton.text = "Pausar"
+                handler.post(runnable)
+                Log.d("Routine", "Rutina INICIADA/REANUDADA.")
+            } else {
+                toggleButton.text = "Reanudar"
+                handler.removeCallbacks(runnable)
+                Log.d("Routine", "Rutina PAUSADA.")
             }
         }
-
-        val layout = LinearLayout(this).apply {
-            orientation = LinearLayout.VERTICAL
-            gravity = android.view.Gravity.CENTER
-            setPadding(16, 16, 16, 16)
-            addView(titleText)
-            addView(repCounterText)
-            addView(timerText)
-            addView(toggleButton)
-        }
-        setContentView(layout)
     }
 
+    // --- El resto de la clase no necesita cambios ---
     override fun onSensorChanged(event: SensorEvent?) {
         if (event?.sensor?.type != Sensor.TYPE_ACCELEROMETER || !isRunning) return
-
         val y = event.values[1]
-
-        if (!isAtBottom && y < SQUAT_THRESHOLD_DOWN) {
-            isAtBottom = true
-        }
-
+        if (!isAtBottom && y < SQUAT_THRESHOLD_DOWN) { isAtBottom = true }
         if (isAtBottom && y > SQUAT_THRESHOLD_UP) {
             repCount++
             repCounterText.text = "Reps: $repCount / $repGoal"
             isAtBottom = false
             Log.d("SquatDetector", "¡Repetición #$repCount detectada!")
-
-            if (repGoal > 0 && repCount >= repGoal) {
-                finishRoutine()
-            }
+            if (repGoal > 0 && repCount >= repGoal) { finishRoutine() }
         }
     }
 
@@ -169,34 +137,30 @@ class ChronometerActivity : ComponentActivity(), SensorEventListener {
 
     private fun finishRoutine() {
         if (!isRunning) return
-
         isRunning = false
         handler.removeCallbacks(runnable)
         timerText.text = "¡Logrado!"
         toggleButton.text = "Finalizado"
         toggleButton.isEnabled = false
         Log.d("Routine", "¡Rutina finalizada!")
+        sendMessageToMobile("/routine_finished", null)
+        handler.postDelayed({ finish() }, 2000)
     }
 
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {}
 
     override fun onResume() {
         super.onResume()
-        accelerometer?.also { accel ->
-            sensorManager.registerListener(this, accel, SensorManager.SENSOR_DELAY_UI)
-        }
-        // Registramos el receptor para el inicio automático
-
+        accelerometer?.also { sensorManager.registerListener(this, it, SensorManager.SENSOR_DELAY_UI) }
         registerReceiver(startReceiver, IntentFilter("com.example.fithome.START_TIMER"), RECEIVER_NOT_EXPORTED)
+        registerReceiver(stopReceiver, IntentFilter("com.example.fithome.STOP_ROUTINE"), RECEIVER_NOT_EXPORTED)
     }
 
     override fun onPause() {
         super.onPause()
         sensorManager.unregisterListener(this)
-
-        // Desregistramos el receptor
-
         unregisterReceiver(startReceiver)
+        unregisterReceiver(stopReceiver)
     }
 
     private fun updateTimerText() {
