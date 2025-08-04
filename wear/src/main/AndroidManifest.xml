@@ -4,6 +4,7 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-feature android:name="android.hardware.type.watch" />
     <uses-permission android:name="android.permission.HIGH_SAMPLING_RATE_SENSORS"/>
+    <!-- Sale advertencia por que se detecta que ese permiso es poco común y suele estar mal usado o no justificado pero no es critico-->
 
     <application
         android:allowBackup="true"
