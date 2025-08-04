@@ -46,6 +46,8 @@
 
         <!-- MainActivity solo para recibir mensajes -->
 
-
+        <activity
+            android:name=".presentation.MainActivity"
+            android:exported="true" />
     </application>
 </manifest>
