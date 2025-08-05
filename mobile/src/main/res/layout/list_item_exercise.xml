@@ -10,61 +10,73 @@
     app:cardCornerRadius="12dp"
     app:cardElevation="4dp">
 
-<<<<<<< Updated upstream
-
-    <TextView
-        android:id="@+id/exercise_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Nombre del Ejercicio"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-=======
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
->>>>>>> Stashed changes
+        android:layout_height="wrap_content"
+        android:padding="8dp">
 
+        <!-- 🔷 Cuadrito/etiqueta directa -->
+        <TextView
+            android:id="@+id/exercise_tag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nuevo"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:background="@android:color/transparent"
+            android:backgroundTint="#4CAF50"
+            android:backgroundTintMode="src_over"
+            android:drawable="@null"
+            android:gravity="center"
+            android:elevation="2dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:ignore="HardcodedText" />
+
+        <!-- 🔹 Imagen -->
         <ImageView
             android:id="@+id/exercise_image"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:layout_margin="16dp"
+            android:layout_margin="8dp"
             android:scaleType="centerCrop"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/ic_launcher_foreground" /> <!-- Imagen de ejemplo -->
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:src="@drawable/ic_squats" />
 
-<<<<<<< Updated upstream
-
-</LinearLayout>
-=======
+        <!-- 🔹 Nombre -->
         <TextView
             android:id="@+id/exercise_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
             android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
-            app:layout_constraintBottom_toTopOf="@+id/exercise_duration"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/exercise_image"
             app:layout_constraintTop_toTopOf="@id/exercise_image"
-            app:layout_constraintVertical_chainStyle="packed"
-            tools:text="Nombre del Ejercicio" />
+            app:layout_constraintStart_toEndOf="@id/exercise_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="Sentadillas" />
 
+        <!-- 🔹 Duración -->
         <TextView
             android:id="@+id/exercise_duration"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
             android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
-            app:layout_constraintBottom_toBottomOf="@id/exercise_image"
-            app:layout_constraintEnd_toEndOf="@id/exercise_name"
-            app:layout_constraintStart_toStartOf="@id/exercise_name"
             app:layout_constraintTop_toBottomOf="@id/exercise_name"
-            tools:text="Duración: 30s" />
+            app:layout_constraintStart_toStartOf="@id/exercise_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="Duración: 45 segundos" />
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.google.android.material.card.MaterialCardView>
->>>>>>> Stashed changes
+
