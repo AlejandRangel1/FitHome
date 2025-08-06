@@ -4,6 +4,7 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-feature android:name="android.hardware.type.watch" />
     <uses-permission android:name="android.permission.HIGH_SAMPLING_RATE_SENSORS"/>
+    <!-- Sale advertencia por que se detecta que ese permiso es poco común o suele estar mal usado o no justificado pero no es critico-->
 
     <application
         android:allowBackup="true"
@@ -20,28 +21,36 @@
             android:name="com.google.android.wearable.standalone"
             android:value="true" />
 
-        <!-- Usa ChronometerActivity como la que se inicia primero -->
+        <!-- Actividad principal del cronómetro en Wear OS -->
         <activity
             android:name=".presentation.ChronometerActivity"
             android:exported="true"
-            android:label="Cronómetro">
+            android:label="Cronómetro"
+            android:taskAffinity=""> <!-- taskAffinity vacío mejora cómo aparece en Recents en dispositivos Wear -->
+
+            <!-- Filtro de intent para declarar esta actividad como la principal de la app -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
+
+
         <service
             android:name=".presentation.MessageService"
             android:exported="true">
             <intent-filter>
+
                 <!-- La acción que escucha los mensajes de Wear OS -->
+
                 <action android:name="com.google.android.gms.wearable.MESSAGE_RECEIVED" />
                 <data android:scheme="wear" android:host="*" android:pathPrefix="/start_routine" />
             </intent-filter>
         </service>
 
         <!-- MainActivity solo para recibir mensajes -->
+
         <activity
             android:name=".presentation.MainActivity"
             android:exported="true" />
