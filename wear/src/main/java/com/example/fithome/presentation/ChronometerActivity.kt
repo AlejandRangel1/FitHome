@@ -91,16 +91,17 @@ class ChronometerActivity : ComponentActivity(), SensorEventListener {
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
         accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
 
-        // Asignamos los datos iniciales a las vistas
+// Asignamos los datos iniciales a las vistas
 
-// Si routineName viene del usuario o backend, está bien dejarlo así
+// Esto está bien si routineName es dinámico
         titleText.text = routineName
 
-// Usamos un recurso de texto con placeholders en lugar de concatenación directa
-        repCounterText.text = getString(R.string.reps_counter, repCount, repGoal)
+// Solución intermedia: usar String.format() para evitar concatenación directa
+        repCounterText.text = String.format("Reps: %d / %d", repCount, repGoal)
 
-// Función personalizada que actualiza el temporizador
+// Actualiza el texto del temporizador
         updateTimerText()
+
 
 
         // Asignamos la lógica al botón del XML
