@@ -92,15 +92,13 @@ class ChronometerActivity : ComponentActivity(), SensorEventListener {
         accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
 
 // Asignamos los datos iniciales a las vistas
-
-// Esto está bien si routineName es dinámico
         titleText.text = routineName
 
-// Solución intermedia: usar String.format() para evitar concatenación directa
-        repCounterText.text = String.format("Reps: %d / %d", repCount, repGoal)
+// Usamos format directamente sobre la cadena, sin usar $ ni imports
+        repCounterText.text = "Reps: %d / %d".format(repCount, repGoal)
 
-// Actualiza el texto del temporizador
         updateTimerText()
+
 
 
 
