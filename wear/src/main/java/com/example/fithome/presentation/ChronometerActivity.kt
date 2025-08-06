@@ -92,9 +92,16 @@ class ChronometerActivity : ComponentActivity(), SensorEventListener {
         accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
 
         // Asignamos los datos iniciales a las vistas
+
+// Si routineName viene del usuario o backend, está bien dejarlo así
         titleText.text = routineName
-        repCounterText.text = "Reps: $repCount / $repGoal"
+
+// Usamos un recurso de texto con placeholders en lugar de concatenación directa
+        repCounterText.text = getString(R.string.reps_counter, repCount, repGoal)
+
+// Función personalizada que actualiza el temporizador
         updateTimerText()
+
 
         // Asignamos la lógica al botón del XML
         toggleButton.setOnClickListener {
