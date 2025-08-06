@@ -23,17 +23,22 @@
 
         <!-- Usa ChronometerActivity como la que se inicia primero -->
 
+        <!-- Configuración de la actividad principal del cronómetro para Wear OS -->
         <activity
-            android:name=".presentation.ChronometerActivity"
-            android:exported="true"
-            android:label="Cronómetro">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:name=".presentation.ChronometerActivity" <!-- Nombre de la clase de la actividad -->
+        android:exported="true" <!-- Indica que esta actividad puede ser iniciada desde fuera de la app -->
+        android:label="Cronómetro" <!-- Nombre visible de la actividad -->
+        android:taskAffinity="" <!-- Solución para el warning: fuerza afinidad única para que aparezca correctamente en "Recents" -->>
 
-        <service
+        <!-- Filtro de intent para indicar que esta es la actividad principal que se lanza al abrir la app -->
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" /> <!-- Acción principal de la app -->
+            <category android:name="android.intent.category.LAUNCHER" /> <!-- Categoría que indica que se muestra en el launcher -->
+        </intent-filter>
+    </activity>
+
+
+    <service
             android:name=".presentation.MessageService"
             android:exported="true">
             <intent-filter>
